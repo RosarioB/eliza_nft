@@ -9,7 +9,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { mainnet, baseSepolia } from "viem/chains";
 import { normalize } from "viem/ens";
 
-const DEPLOYED_CONTRACT_ADDRESS = "0xDe552b9Ef4028d1B5f06203Fa25c3D1Fc5945785"; // Base Sepolia
+const DEPLOYED_CONTRACT_ADDRESS = "0x69445A62C078Affc198e37A0227a9a6D669DE29E"; // Base Sepolia
 
 const erc721Abi = parseAbi([
     "function safeMint(address to, string memory uri) public",

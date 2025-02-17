@@ -60,8 +60,7 @@ export const nftDataEvaluator: Evaluator = {
         "COLLECT_NFT_DATA",
         "NFT_DETAILS",
     ],
-    description:
-        "Extract the NFT's name, description, and recipient (an Ethereum address) from the conversation when explicitly mentioned.",
+    description: `Extract the NFT's name, description, and recipient (an Ethereum address) from the conversation when explicitly mentioned and mint a new NFT.`,
     alwaysRun: true,
 
     validate: async (
@@ -118,7 +117,11 @@ export const nftDataEvaluator: Evaluator = {
             let dataUpdated = false;
 
             for (const field of ["name", "description", "recipient"] as const) {
-                if (extractedInfo[field] && cachedData[field] === undefined) {
+                if (
+                    extractedInfo[field] &&
+                    extractedInfo[field].trim().toLowerCase() !== "null" &&
+                    cachedData[field] === undefined
+                ) {
                     cachedData[field] = extractedInfo[field];
                     dataUpdated = true;
                 }
@@ -132,7 +135,7 @@ export const nftDataEvaluator: Evaluator = {
             }
 
             if (isDataComplete(cachedData)) {
-                elizaLogger.success(
+                elizaLogger.info(
                     "NFT data collection completed:",
                     cachedData
                 );
@@ -141,7 +144,7 @@ export const nftDataEvaluator: Evaluator = {
                     cachedData.name,
                     cachedData.description
                 );
-                elizaLogger.success(
+                elizaLogger.info(
                     `Uploaded JSON to IPFS with hash: ${dataIpfsHash}`
                 );
                 const dataIpfsUrl = `ipfs://${dataIpfsHash}`;
@@ -149,7 +152,7 @@ export const nftDataEvaluator: Evaluator = {
                     cachedData.recipient,
                     dataIpfsUrl
                 );
-                elizaLogger.success(
+                elizaLogger.info(
                     `Minted NFT with transaction hash: ${mintTxHash}`
                 );
                 cachedMintTx.lastUpdated = Date.now();

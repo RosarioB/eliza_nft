@@ -39,6 +39,7 @@ import {
     type IDatabaseCacheAdapter,
     ModelProviderName,
     parseBooleanFromText,
+    Plugin,
     settings,
     stringToUuid,
     validateCharacterConfig,
@@ -844,7 +845,7 @@ export async function createAgent(
         throw new Error("Invalid TEE configuration");
     }
 
-   let zilliqaPlugin: any | undefined;
+    let zilliqaPlugin: any | undefined;
     if (getSecret(character, "ZILLIQA_PRIVATE_KEY")) {
         zilliqaPlugin = await createZilliqaPlugin((secret) =>
             getSecret(character, secret)
@@ -903,17 +904,23 @@ export async function createAgent(
         elizaLogger.log("Verifiable inference primus adapter initialized");
     }
 
+    const myPlugin: Plugin = {
+        name: "my-plugin",
+        description: "My plugin",
+        actions: [],
+        providers: [nftDataProvider, mintedNftTxProvider],
+        evaluators: [nftDataEvaluator],
+    };
+
     return new AgentRuntime({
         databaseAdapter: db,
         token,
         modelProvider: character.modelProvider,
-        evaluators: [nftDataEvaluator],
+        evaluators: [],
         character,
         // character.plugins are handled when clients are added
-        plugins: [bootstrapPlugin, nodePlugin]
-            .flat()
-            .filter(Boolean),
-        providers: [nftDataProvider, mintedNftTxProvider],
+        plugins: [bootstrapPlugin, nodePlugin, myPlugin].flat().filter(Boolean),
+        providers: [],
         managers: [],
         cacheManager: cache,
         fetch: logFetch,

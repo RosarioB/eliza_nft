@@ -1,3 +1,14 @@
+# eliza_nft
+Set the following environment variables:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+EVM_PRIVATE_KEY=your_evm_private_key_here
+ETHEREUM_PROVIDER_BASESEPOLIA=your_ethereum_provider_url_here
+PINATA_JWT=your_pinata_jwt_here
+PINATA_GATEWAY_URL=your_pinata_gateway_url_here
+```
+
 # Eliza 🤖
 
 <div align="center">
@@ -190,4 +201,3 @@ We now have a [paper](https://arxiv.org/pdf/2501.06781) you can cite for the Eli
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=elizaos/eliza&type=Date)](https://star-history.com/#elizaos/eliza&Date)
-# eliza_nft

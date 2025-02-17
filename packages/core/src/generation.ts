@@ -367,6 +367,8 @@ export async function generateText({
         return "";
     }
 
+    //elizaLogger.info(`The context is: \n${context}`);
+
     elizaLogger.log("Generating text...");
 
     elizaLogger.info("Generating text with options:", {

@@ -7,7 +7,7 @@ import {
 } from "@elizaos/core";
 
 import { emptyMintTx, emptyNftData, MintTxData, NftData } from "./nftDataEvaluator.ts";
-import { arbitrumSepolia } from "viem/chains";
+import { arbitrumSepolia, baseSepolia } from "viem/chains";
 
 // Field-specific guidance
 const FIELD_GUIDANCE = {
@@ -141,12 +141,12 @@ export const mintedNftTxProvider: Provider = {
                 mintTxCachedData.txHash &&
                 mintTxCachedData.txHash.trim() !== ""
             ) {
-                const blockExplorerUrl = arbitrumSepolia.blockExplorers.default.url as string;
+                const blockExplorerUrl = baseSepolia.blockExplorers.default.url as string;
                 elizaLogger.log("Block explorer URL:", blockExplorerUrl);
                 const txUrl = `${blockExplorerUrl}/tx/${mintTxCachedData.txHash}`;
                 response += `The NFT has been created successfully!\n`;
                 response += `The transaction hash is ${txUrl}\n`;
-                response += `The transaction URL on the Arbitrum block explorer is: ${txUrl}`;
+                response += `The transaction URL on the Base Sepolia block explorer is: ${txUrl}`;
             }
 
             return response;
