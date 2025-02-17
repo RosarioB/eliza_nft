@@ -1,4 +1,9 @@
 # eliza_nft
+This is the repository of this [Youtube video](https://www.youtube.com/watch?v=ljJh6piK1GY)
+
+In this repository we create a new plugin for Eliza to mint NFTs on Base Sepolia. We make use of an ERC721 smart contract created with Open Zeppelin in Solidity.
+To store the NFT metadata on IPFS we make use of the Pinata SDK.
+
 Set the following environment variables:
 
 ```
